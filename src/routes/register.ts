@@ -14,25 +14,21 @@ router.post('/', async (req, res: Response) => {
         const recieved: any = jwt.verify(req.headers['authorization'], process.env.JWT_SECRET as string);
         if (!recieved.email) {
             console.log('Failed to authenticate token!');
-            return res
-                .status(401)
-                .send({
-                    message: 'Failed to authenticate token!'
-                })
+            return res.status(401).send({
+                message: 'Failed to authenticate token!'
+            });
         }
 
-        const { email, username, password } = recieved as { [x: string]: string }
+        const { email, username, password } = recieved as { [x: string]: string };
         const dbrq = await res.locals.Users.findOne({
             where: { email }
-        })
+        });
 
         if (dbrq) {
             console.log('email already exists');
-            return res
-                .status(401)
-                .send({
-                    message: 'email already exists'
-                })
+            return res.status(401).send({
+                message: 'email already exists'
+            });
         }
 
         const userRQ = await res.locals.Users.findOne({
@@ -59,11 +55,9 @@ router.post('/', async (req, res: Response) => {
             res.send('Account created!');
         }
     } else {
-        return res
-            .status(401)
-            .send({
-                message: 'No token!'
-            })
+        return res.status(401).send({
+            message: 'No token!'
+        });
     }
 });
 

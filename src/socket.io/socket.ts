@@ -1,7 +1,7 @@
-import { Server as IOServer } from 'socket.io'
-import { Server } from 'http'
+import { Server as IOServer } from 'socket.io';
+import { Server } from 'http';
 
-export = async (io: IOServer, server: Server) => {
+export = async (io: IOServer, server: Server): Promise<void> => {
     const socket = io.listen(server);
 
     socket.on('connection', function (socket) {
@@ -16,6 +16,4 @@ export = async (io: IOServer, server: Server) => {
             console.log('Client Disconnected.');
         });
     });
-
-    return this;
-}
+};

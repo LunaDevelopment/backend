@@ -22,8 +22,13 @@ export default function (sequelize: Sequelize) {
         loses: {
             type: DataTypes.INTEGER,
             unique: false
+        },
+        friends: {
+            type: DataTypes.ARRAY(DataTypes.STRING),
+            unique: false
         }
-    }
+    };
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return sequelize.define('stats', model) as ModelCtor<Model<any, any> & { [x in keyof typeof model]?: string }>;
 }

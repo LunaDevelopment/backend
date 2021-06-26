@@ -3,11 +3,11 @@ import { DataTypes, Sequelize, ModelCtor, Model } from 'sequelize';
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export default function (sequelize: Sequelize) {
     const model = {
-        // id: {
-        //     type: DataTypes.INTEGER,
-        //     primaryKey: true,
-        //     autoIncrement: true
-        // },
+        id: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true
+        },
         username: {
             type: DataTypes.STRING,
             unique: true
@@ -20,6 +20,8 @@ export default function (sequelize: Sequelize) {
             type: DataTypes.STRING,
             unique: false
         }
-    }
+    };
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return sequelize.define('users', model) as ModelCtor<Model<any, any> & { [x in keyof typeof model]: string }>;
 }
