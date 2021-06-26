@@ -4,6 +4,10 @@ import argon2 from 'argon2';
 
 const router = Router();
 
+router.get('/', (req, res) => {
+    res.send('register aaa');
+});
+
 router.post('/', async (req, res: Response) => {
     console.log(req.headers['authorization']);
 

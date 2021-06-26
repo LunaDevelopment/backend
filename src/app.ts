@@ -4,7 +4,7 @@ import loginRouter from './routes/login';
 import indexRouter from './routes/index';
 import cookieParser from 'cookie-parser';
 import createError from 'http-errors';
-import models from './models';
+import { Models } from './models';
 import logger from 'morgan';
 
 const app = express();
@@ -19,7 +19,7 @@ app.use(cookieParser());
 app.use(express.static(__dirname + '/../Assets/public'));
 
 app.use(function (req: Request, res, next) {
-    res.locals = models;
+    res.locals = Models;
     next();
 });
 

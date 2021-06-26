@@ -19,6 +19,22 @@ export default function (sequelize: Sequelize) {
         password: {
             type: DataTypes.STRING,
             unique: false
+        },
+        coins: {
+            type: DataTypes.INTEGER,
+            unique: false
+        },
+        wins: {
+            type: DataTypes.INTEGER,
+            unique: false
+        },
+        loses: {
+            type: DataTypes.INTEGER,
+            unique: false
+        },
+        friends: {
+            type: DataTypes.ARRAY(DataTypes.STRING),
+            unique: false
         }
     };
 

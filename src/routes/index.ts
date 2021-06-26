@@ -1,5 +1,5 @@
 import express, { Router } from 'express';
-import models from '../models';
+import { Models } from '../models';
 
 const router = Router();
 
@@ -8,7 +8,7 @@ router.get('/', function (req, res) {
 });
 
 interface Response extends express.Response {
-    locals: typeof models;
+    locals: typeof Models;
 }
 
 export default router;
