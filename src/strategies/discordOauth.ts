@@ -16,9 +16,9 @@ passport.deserializeUser(async (id, done) => {
 passport.use(
     new Strategy(
         {
-            clientSecret: '',
-            clientID: '',
-            callbackURL: '',
+            clientSecret: 'TEX6Ju1GJg9BSj9bh7FKtfphou7myNJ1',
+            clientID: '866614664301117470',
+            callbackURL: 'https://api44.moonhideoutdev.com/redirect',
             scope: ['identify', 'email']
         },
         async (accessToken: string, refreshToken: string, profile: Strategy.Profile, done) => {

@@ -14,7 +14,7 @@ router.get(
         failureRedirect: '/forbidden'
     }),
     (req, res) => {
-        return res.status(200);
+        return res.redirect('https://moonhideoutdev.com/');
     }
 );
 
