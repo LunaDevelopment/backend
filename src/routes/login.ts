@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
 });
 
 //main discord
-router.post('/discord', passport.authenticate('discord'));
+router.get('/discord', passport.authenticate('discord'));
 
 router.post('/', async (req, res: Response) => {
     if (req.headers['authorization']) {
