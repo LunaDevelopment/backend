@@ -9,6 +9,7 @@ router.get('/', (req, res) => {
     res.render('login');
 });
 
+//main discord
 router.post('/discord', passport.authenticate('discord'));
 
 router.post('/', async (req, res: Response) => {
