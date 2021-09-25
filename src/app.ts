@@ -14,6 +14,7 @@ const allowedOrigins = ['www.moonhideoutdev.com'];
 app.use(
     cors({
         origin: function (origin, callback) {
+            console.log(origin);
             if (!origin) return callback(null, true);
             if (allowedOrigins.indexOf(origin) === -1) {
                 const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
