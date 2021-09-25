@@ -6,8 +6,23 @@ import cookieParser from 'cookie-parser';
 import createError from 'http-errors';
 import { Models } from './models';
 import logger from 'morgan';
+import cors from 'cors';
 
 const app = express();
+
+const allowedOrigins = ['www.moonhideoutdev.com'];
+app.use(
+    cors({
+        origin: function (origin, callback) {
+            if (!origin) return callback(null, true);
+            if (allowedOrigins.indexOf(origin) === -1) {
+                const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+                return callback(new Error(msg), false);
+            }
+            return callback(null, true);
+        }
+    })
+);
 
 app.set('views', __dirname + '/../Assets/views');
 app.set('view engine', 'pug');
