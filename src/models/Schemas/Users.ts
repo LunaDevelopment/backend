@@ -35,6 +35,10 @@ export default function (sequelize: Sequelize) {
         friends: {
             type: DataTypes.ARRAY(DataTypes.STRING),
             unique: false
+        },
+        LoginType: {
+            type: DataTypes.STRING,
+            unique: false
         }
     };
 
