@@ -8,7 +8,7 @@ import http from 'http';
 
 const server = http.createServer(app);
 const debug = Debug('myapp:server');
-const port = process.env.port;
+const port = process.env.PORT;
 const io = new IOServer();
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
