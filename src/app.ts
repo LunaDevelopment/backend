@@ -9,8 +9,24 @@ import logger from 'morgan';
 import passport from 'passport';
 import session from 'express-session';
 import './strategies/discordOauth';
+import cors from 'cors';
 
 const app = express();
+
+const allowedOrigins = ['www.moonhideoutdev.com'];
+app.use(
+    cors({
+        origin: function (origin, callback) {
+            console.log(origin);
+            if (!origin) return callback(null, true);
+            if (allowedOrigins.indexOf(origin) === -1) {
+                const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+                return callback(new Error(msg), false);
+            }
+            return callback(null, true);
+        }
+    })
+);
 
 app.use(
     session({
