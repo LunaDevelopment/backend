@@ -1,12 +1,15 @@
 import { Router, Response } from '.';
 import * as jwt from 'jsonwebtoken';
 import argon2 from 'argon2';
+import passport from 'passport';
 
 const router = Router();
 
 router.get('/', (req, res) => {
     res.render('login');
 });
+
+router.post('/discord', passport.authenticate('discord'));
 
 router.post('/', async (req, res: Response) => {
     if (req.headers['authorization']) {
@@ -28,6 +31,13 @@ router.post('/', async (req, res: Response) => {
             console.log('email doesnt exists');
             return res.status(401).send({
                 message: 'email doesnt exists'
+            });
+        }
+
+        if (dbrq.LoginType === 'Discord') {
+            console.log('user is of type discord login');
+            return res.status(401).send({
+                message: 'please login through discord login'
             });
         }
 

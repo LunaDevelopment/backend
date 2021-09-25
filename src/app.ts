@@ -6,8 +6,26 @@ import cookieParser from 'cookie-parser';
 import createError from 'http-errors';
 import { Models } from './models';
 import logger from 'morgan';
+import passport from 'passport';
+import session from 'express-session';
+import './strategies/discordOauth';
 
 const app = express();
+
+app.use(
+    session({
+        cookie: {
+            maxAge: 60000 * 60 * 24
+        },
+        secret: 'yonaIsStinky',
+        resave: false,
+        saveUninitialized: false,
+        name: 'discord.oauth'
+    })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.set('views', __dirname + '/../Assets/views');
 app.set('view engine', 'pug');
