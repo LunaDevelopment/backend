@@ -13,7 +13,7 @@ import cors from 'cors';
 
 const app = express();
 
-const allowedOrigins = ['www.moonhideoutdev.com'];
+const allowedOrigins = ['https://moonhideoutdev.com'];
 app.use(
     cors({
         origin: function (origin, callback) {
