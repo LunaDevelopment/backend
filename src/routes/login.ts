@@ -13,46 +13,50 @@ router.get('/', (req, res) => {
 router.get('/discord', passport.authenticate('discord'));
 
 router.post('/', async (req, res: Response) => {
-    if (req.headers['authorization']) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const recieved: any = jwt.verify(req.headers['authorization'], process.env.JWT_SECRET as string);
-        if (!recieved.email) {
-            console.log('Failed to authenticate token!');
+    try {
+        if (req.headers['authorization']) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const recieved: any = jwt.verify(req.headers['authorization'], process.env.JWT_SECRET as string);
+            if (!recieved.email) {
+                return res.status(401).send({
+                    message: 'token authentication failure'
+                });
+            }
+
+            const { email, password } = recieved;
+            const dbrq = await res.locals.Users.findOne({
+                where: { email }
+            });
+
+            if (!dbrq) {
+                console.log('email doesnt exists');
+                return res.status(401).send({
+                    message: 'email does not exist'
+                });
+            }
+
+            if (dbrq.logintype === 'discord') {
+                return res.status(401).send({
+                    message: 'please login through discord'
+                });
+            }
+
+            const verifyPass = await argon2.verify(dbrq.password, password);
+            if (!verifyPass) {
+                return res.status(401).json({
+                    message: 'incorrect password'
+                });
+            }
+
+            res.json({ email, username: dbrq.username }).send();
+        } else {
             return res.status(401).send({
-                message: 'Failed to authenticate token!'
+                message: 'no token'
             });
         }
-
-        const { email, password } = recieved;
-        const dbrq = await res.locals.Users.findOne({
-            where: { email }
-        });
-
-        if (!dbrq) {
-            console.log('email doesnt exists');
-            return res.status(401).send({
-                message: 'email doesnt exists'
-            });
-        }
-
-        if (dbrq.LoginType === 'Discord') {
-            console.log('user is of type discord login');
-            return res.status(401).send({
-                message: 'please login through discord login'
-            });
-        }
-
-        const verifyPass = await argon2.verify(dbrq.password, password);
-        if (!verifyPass) {
-            return res.status(401).json({
-                message: 'incorrect password'
-            });
-        }
-
-        res.json({ email, username: dbrq.username }).send();
-    } else {
+    } catch (error) {
         return res.status(401).send({
-            message: 'No token!'
+            message: `unexpected error: ${error}`
         });
     }
 });
