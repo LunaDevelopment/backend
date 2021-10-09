@@ -7,6 +7,10 @@ export default function (sequelize: Sequelize) {
             type: DataTypes.BOOLEAN,
             defaultValue: false
         },
+        token: {
+            type: DataTypes.STRING,
+            unique: true
+        },
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
