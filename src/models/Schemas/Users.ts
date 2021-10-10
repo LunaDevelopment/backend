@@ -3,6 +3,14 @@ import { DataTypes, Sequelize, ModelCtor, Model } from 'sequelize';
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export default function (sequelize: Sequelize) {
     const model = {
+        active: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
+        },
+        token: {
+            type: DataTypes.STRING,
+            unique: true
+        },
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
@@ -22,23 +30,32 @@ export default function (sequelize: Sequelize) {
         },
         coins: {
             type: DataTypes.INTEGER,
-            unique: false
+            unique: false,
+            defaultValue: 0
         },
         wins: {
             type: DataTypes.INTEGER,
-            unique: false
+            unique: false,
+            defaultValue: 0
         },
         loses: {
             type: DataTypes.INTEGER,
-            unique: false
+            unique: false,
+            defaultValue: 0
         },
         friends: {
             type: DataTypes.ARRAY(DataTypes.STRING),
             unique: false
         },
-        LoginType: {
+        logintype: {
             type: DataTypes.STRING,
-            unique: false
+            unique: false,
+            defaultValue: 'local'
+        },
+        premium: {
+            type: DataTypes.BOOLEAN,
+            unique: false,
+            defaultValue: false
         }
     };
 
