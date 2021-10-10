@@ -40,16 +40,18 @@ app.use(
     })
 );
 
-app.use(compression({
-    level: 5, //Compression Level
-    threshold: 100000, //in Bytes
-    filter: (req, res) => {
-        if (req.headers['x-no-compression']){
-            return false
+app.use(
+    compression({
+        level: 5, //Compression Level
+        threshold: 100000, //in Bytes
+        filter: (req, res) => {
+            if (req.headers['x-no-compression']){
+                return false
+            }
+            return compression.filter(req, res)
         }
-        return compression.filter(req, res)
-    }
-}))
+    })
+);
 
 app.use(passport.initialize());
 app.use(passport.session());
