@@ -1,5 +1,6 @@
 import { Sequelize } from 'sequelize';
 import users from './Schemas/Users';
+import logger from '../logs/index';
 
 //const { DATABASE_PASSWORD, USER, DATABASE } = process.env as { [x: string]: string };
 const sequelize = new Sequelize('moon', 'moon', '1234', {
@@ -18,6 +19,7 @@ const Models = {
         console.log('Connection has been established successfully.');
     } catch (error) {
         console.error('Unable to connect to the database:', error);
+        logger.error(error)
     }
 })();
 

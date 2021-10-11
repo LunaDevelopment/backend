@@ -2,6 +2,7 @@ import { Router, Response } from '.';
 import * as jwt from 'jsonwebtoken';
 import argon2 from 'argon2';
 import passport from 'passport';
+import logger from '../logs/index';
 
 const router = Router();
 
@@ -55,6 +56,7 @@ router.post('/', async (req, res: Response) => {
             });
         }
     } catch (error) {
+        logger.error(error)
         return res.status(401).send({
             message: `unexpected error: ${error}`
         });
