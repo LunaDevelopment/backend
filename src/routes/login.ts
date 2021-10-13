@@ -6,65 +6,13 @@ import logger from '../logs/index';
 
 const router = Router();
 
-// router.get('/', (req, res) => {
-//     res.render('login');
-// });
-
-//main discord
 router.get('/discord', passport.authenticate('discord'));
 
 router.get('/auth', (req, res) => {
+    if (!req.user) {
+        return res.redirect('https://api.moonhideoutdev.com/login/discord');
+    }
     res.json(req.user)
 })
-
-// router.post('/', async (req, res: Response) => {
-//     try {
-//         if (req.headers['authorization']) {
-//             // eslint-disable-next-line @typescript-eslint/no-explicit-any
-//             const recieved: any = jwt.verify(req.headers['authorization'], process.env.JWT_SECRET as string);
-//             if (!recieved.email) {
-//                 return res.status(401).send({
-//                     message: 'token authentication failure'
-//                 });
-//             }
-
-//             const { email, password } = recieved;
-//             const dbrq = await res.locals.Users.findOne({
-//                 where: { email }
-//             });
-
-//             if (!dbrq) {
-//                 console.log('email doesnt exists');
-//                 return res.status(401).send({
-//                     message: 'email does not exist'
-//                 });
-//             }
-
-//             if (dbrq.logintype === 'discord') {
-//                 return res.status(401).send({
-//                     message: 'please login through discord'
-//                 });
-//             }
-
-//             const verifyPass = await argon2.verify(dbrq.password, password);
-//             if (!verifyPass) {
-//                 return res.status(401).json({
-//                     message: 'incorrect password'
-//                 });
-//             }
-
-//             res.json({ email, username: dbrq.username }).send();
-//         } else {
-//             return res.status(401).send({
-//                 message: 'no token'
-//             });
-//         }
-//     } catch (error) {
-//         logger.error(error)
-//         return res.status(401).send({
-//             message: `unexpected error: ${error}`
-//         });
-//     }
-// });
 
 export default router;
