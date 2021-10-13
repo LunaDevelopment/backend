@@ -11,7 +11,7 @@ router.get('/', function (req, res) {
 router.get('/redirect', passport.authenticate('discord'), (req, res) => {
     const c = req.cookies['discord.oauth']
     res.setHeader('Set-Cookie',`discord.oauth=${c}; Max-Age=604800; Domain=http://localhost:8080/; Secure; HttpOnly`);
-    res.redirect('http://localhost:8080/');
+    res.send();
 });
 
 interface Response extends express.Response {
