@@ -9,11 +9,7 @@ const router = Router();
 router.get('/discord', passport.authenticate('discord'));
 
 router.get('/auth', (req, res) => {
-    if (!req.user) {
-        return res.send({
-            message: "not logged in"
-        });
-    }
+    console.log(req.user);
     res.send(req.user)
 })
 
