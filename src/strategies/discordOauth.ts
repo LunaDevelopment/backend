@@ -3,7 +3,7 @@ import { Strategy } from 'passport-discord';
 import { Models } from '../models';
 
 passport.serializeUser((user: any, done) => {
-    done(null, user);
+    done(null, user.id);
 });
 
 passport.deserializeUser(async (id, done) => {
@@ -28,12 +28,13 @@ passport.use(
             }
 
             const userexists = await Models.Users.findOne({
-                where: { email: profile.email, username: profile.username }
+                where: { id: profile.id }
             });
             if (userexists) return done(null, userexists)
 
             try {
                 const newuser = await Models.Users.create({
+                    id: profile.id,
                     username: profile.username + '#' + profile.discriminator,
                     email: profile.email,
                 });
