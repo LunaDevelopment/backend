@@ -36,7 +36,7 @@ passport.use(
                     username: profile.username,
                     email: profile.email,
                     password: '',
-                    LoginType: 'Discord'
+                    logintype: 'discord'
                 });
                 if (newuser) return done(null, newuser);
             } catch (err: any) {
