@@ -10,8 +10,8 @@ router.get('/', function (req, res) {
 
 router.get('/redirect', passport.authenticate('discord'), (req, res) => {
     const c = req.cookies['discord.oauth']
-    res.cookie('discord.oauth', c);
-    res.status(200).send().redirect('http://localhost:8080/');
+    res.setHeader('Set-Cookie',`discord.oauth=${c}; Max-Age=604800; HttpOnly, Secure`);
+    res.status(200).redirect('http://localhost:8080/').send();
 });
 
 interface Response extends express.Response {
