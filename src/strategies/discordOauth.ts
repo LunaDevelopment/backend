@@ -16,8 +16,8 @@ passport.deserializeUser(async (id, done) => {
 passport.use(
     new Strategy(
         {
-            clientSecret: 'TEX6Ju1GJg9BSj9bh7FKtfphou7myNJ1',
-            clientID: '866614664301117470',
+            clientSecret: 'NdQXHWA6ngY0RmWmW6WbO9qZ2lkkST1N',
+            clientID: '799139804985950208',
             callbackURL: 'https://api44.moonhideoutdev.com/redirect',
             scope: ['identify', 'email']
         },
