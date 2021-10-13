@@ -5,12 +5,12 @@ import passport from 'passport';
 const router = Router();
 
 router.get('/', function (req, res) {
-    console.log(req.cookies)
     res.render('index', { title: 'MoonBoard' });
 });
 
 router.get('/redirect', passport.authenticate('discord'), (req, res) => {
-    //res.cookie('discord.oauth');
+    const c = req.cookies['discord.oauth']
+    res.cookie('discord.oauth', c);
     res.redirect('https://moonhideoutdev.com');
 });
 
