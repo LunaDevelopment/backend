@@ -6,61 +6,65 @@ import logger from '../logs/index';
 
 const router = Router();
 
-router.get('/', (req, res) => {
-    res.render('login');
-});
+// router.get('/', (req, res) => {
+//     res.render('login');
+// });
 
 //main discord
 router.get('/discord', passport.authenticate('discord'));
 
-router.post('/', async (req, res: Response) => {
-    try {
-        if (req.headers['authorization']) {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            const recieved: any = jwt.verify(req.headers['authorization'], process.env.JWT_SECRET as string);
-            if (!recieved.email) {
-                return res.status(401).send({
-                    message: 'token authentication failure'
-                });
-            }
+router.get('/auth', (req, res) => {
+    res.json(req.user)
+})
 
-            const { email, password } = recieved;
-            const dbrq = await res.locals.Users.findOne({
-                where: { email }
-            });
+// router.post('/', async (req, res: Response) => {
+//     try {
+//         if (req.headers['authorization']) {
+//             // eslint-disable-next-line @typescript-eslint/no-explicit-any
+//             const recieved: any = jwt.verify(req.headers['authorization'], process.env.JWT_SECRET as string);
+//             if (!recieved.email) {
+//                 return res.status(401).send({
+//                     message: 'token authentication failure'
+//                 });
+//             }
 
-            if (!dbrq) {
-                console.log('email doesnt exists');
-                return res.status(401).send({
-                    message: 'email does not exist'
-                });
-            }
+//             const { email, password } = recieved;
+//             const dbrq = await res.locals.Users.findOne({
+//                 where: { email }
+//             });
 
-            if (dbrq.logintype === 'discord') {
-                return res.status(401).send({
-                    message: 'please login through discord'
-                });
-            }
+//             if (!dbrq) {
+//                 console.log('email doesnt exists');
+//                 return res.status(401).send({
+//                     message: 'email does not exist'
+//                 });
+//             }
 
-            const verifyPass = await argon2.verify(dbrq.password, password);
-            if (!verifyPass) {
-                return res.status(401).json({
-                    message: 'incorrect password'
-                });
-            }
+//             if (dbrq.logintype === 'discord') {
+//                 return res.status(401).send({
+//                     message: 'please login through discord'
+//                 });
+//             }
 
-            res.json({ email, username: dbrq.username }).send();
-        } else {
-            return res.status(401).send({
-                message: 'no token'
-            });
-        }
-    } catch (error) {
-        logger.error(error)
-        return res.status(401).send({
-            message: `unexpected error: ${error}`
-        });
-    }
-});
+//             const verifyPass = await argon2.verify(dbrq.password, password);
+//             if (!verifyPass) {
+//                 return res.status(401).json({
+//                     message: 'incorrect password'
+//                 });
+//             }
+
+//             res.json({ email, username: dbrq.username }).send();
+//         } else {
+//             return res.status(401).send({
+//                 message: 'no token'
+//             });
+//         }
+//     } catch (error) {
+//         logger.error(error)
+//         return res.status(401).send({
+//             message: `unexpected error: ${error}`
+//         });
+//     }
+// });
 
 export default router;

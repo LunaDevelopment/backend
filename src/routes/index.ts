@@ -11,7 +11,7 @@ router.get('/', function (req, res) {
 router.get(
     '/redirect',
     passport.authenticate('discord', {
-        failureRedirect: '/forbidden'
+        failureRedirect: 'https://moonhideoutdev.com/'
     }),
     (req, res) => {
         return res.redirect('https://moonhideoutdev.com/');

@@ -3,7 +3,7 @@ import { Strategy } from 'passport-discord';
 import { Models } from '../models';
 
 passport.serializeUser((user: any, done) => {
-    done(null, user.id);
+    done(null, user);
 });
 
 passport.deserializeUser(async (id, done) => {
@@ -18,7 +18,7 @@ passport.use(
         {
             clientSecret: 'TEX6Ju1GJg9BSj9bh7FKtfphou7myNJ1',
             clientID: '866614664301117470',
-            callbackURL: 'https://api44.moonhideoutdev.com/redirect',
+            callbackURL: '/redirect',
             scope: ['identify', 'email']
         },
         async (accessToken: string, refreshToken: string, profile: Strategy.Profile, done) => {
@@ -29,7 +29,7 @@ passport.use(
             const userexists = await Models.Users.findOne({
                 where: { email: profile.email, username: profile.username }
             });
-            if (userexists) return done(null, userexists);
+            if (userexists) return done(null, userexists)
 
             try {
                 const newuser = await Models.Users.create({
