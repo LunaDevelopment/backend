@@ -19,7 +19,7 @@ passport.use(
         {
             clientSecret: 'NdQXHWA6ngY0RmWmW6WbO9qZ2lkkST1N',
             clientID: '799139804985950208',
-            callbackURL: 'https://moonhideoutdev.com',
+            callbackURL: 'https://api44.moonhideoutdev.com/redirect',
             scope: ['identify', 'email']
         },
         async (accessToken: string, refreshToken: string, profile: Strategy.Profile, done) => {
