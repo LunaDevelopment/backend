@@ -9,7 +9,7 @@ router.get('/', function (req, res) {
 });
 
 router.get('/redirect', passport.authenticate('discord'), (req, res) => {
-    res.cookie('discord.oauth', req.cookies['discord.oauth']);
+    res.cookie('discord.oauth', req.cookies['discord.oauth'], {expires: 60000 * 60 * 24 * 7});
     res.redirect(302, 'http://localhost:8080/');
 });
 
