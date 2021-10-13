@@ -38,8 +38,6 @@ app.use(
     session({
         cookie: {
             maxAge: 60000 * 60 * 24 * 7,
-            sameSite: 'none',
-            secure: true,
         },
         secret: 'nvdbuw93090rei-f09dsju4b',
         resave: false,
