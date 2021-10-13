@@ -7,10 +7,7 @@ passport.serializeUser((user: any, done) => {
 });
 
 passport.deserializeUser(async (id, done) => {
-    const user = await Models.Users.findOne({
-        where: { id }
-    });
-    if (user) done(null, user);
+    return done(null, user);
 });
 
 passport.use(
