@@ -7,7 +7,11 @@ passport.serializeUser((user: any, done) => {
 });
 
 passport.deserializeUser(async (id, done) => {
-    return done(null, id);
+    console.log(id)
+    const user = await Models.Users.findOne({
+        where: { email: id.email }
+    })
+    return done(null, user);
 });
 
 passport.use(
