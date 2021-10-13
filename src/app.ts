@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import registerRouter from './routes/register';
+//import registerRouter from './routes/register';
 import loginRouter from './routes/login';
 import indexRouter from './routes/index';
 import cookieParser from 'cookie-parser';
@@ -71,7 +71,7 @@ app.use(function (req: Request, res, next) {
 });
 
 app.use('/', indexRouter);
-app.use('/register', registerRouter);
+//app.use('/register', registerRouter);
 app.use('/login', loginRouter);
 
 app.use(function (req, res, next) {
