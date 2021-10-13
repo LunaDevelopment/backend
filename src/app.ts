@@ -30,7 +30,7 @@ app.use(
             return callback(null, true);
         },
         credentials: true,
-        exposedHeaders: ['set-cookie']
+        exposedHeaders: ['Set-Cookie']
     })
 );
 
