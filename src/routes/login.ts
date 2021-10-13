@@ -10,7 +10,7 @@ router.get('/discord', passport.authenticate('discord'));
 
 router.get('/auth', (req, res) => {
     if (!req.user) {
-        return res.redirect('https://api.moonhideoutdev.com/login/discord');
+        return res.redirect('https://api44.moonhideoutdev.com/login/discord');
     }
     res.json(req.user)
 })
