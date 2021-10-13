@@ -9,7 +9,7 @@ passport.serializeUser((user: any, done) => {
 passport.deserializeUser(async (id, done) => {
     console.log(id)
     const user = await Models.Users.findOne({
-        where: { email: id.email }
+        where: { email: id }
     })
     return done(null, user);
 });
