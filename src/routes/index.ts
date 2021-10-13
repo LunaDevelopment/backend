@@ -5,6 +5,7 @@ import passport from 'passport';
 const router = Router();
 
 router.get('/', function (req, res) {
+    console.log(req.cookies)
     res.render('index', { title: 'MoonBoard' });
 });
 
