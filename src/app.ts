@@ -11,8 +11,12 @@ import session from 'express-session';
 import './strategies/discordOauth';
 import cors from 'cors';
 import compression from 'compression';
+import Redis from 'ioredis';
+import connectRedis from 'connect-redis';
 
 const app = express();
+const RedisStore = connectRedis(session);
+const redisClient = new Redis();
 
 const allowedOrigins = ['https://moonhideoutdev.com', 'http://localhost:8080'];
 app.use(
@@ -31,11 +35,12 @@ app.use(
 app.use(
     session({
         cookie: {
-            maxAge: 60000 * 60 * 24
+            maxAge: 60000 * 60 * 24 * 7
         },
-        secret: 'yonaIsStinky',
+        secret: 'nvdbuw93090rei-f09dsju4b',
         resave: false,
         saveUninitialized: false,
+        store: new RedisStore({ client: redisClient }),
         name: 'discord.oauth'
     })
 );
@@ -45,10 +50,10 @@ app.use(
         level: 5, //Compression Level
         threshold: 100000, //in Bytes
         filter: (req, res) => {
-            if (req.headers['x-no-compression']){
-                return false
+            if (req.headers['x-no-compression']) {
+                return false;
             }
-            return compression.filter(req, res)
+            return compression.filter(req, res);
         }
     })
 );
