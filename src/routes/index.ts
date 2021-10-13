@@ -11,7 +11,7 @@ router.get('/', function (req, res) {
 router.get('/redirect', passport.authenticate('discord'), (req, res) => {
     const c = req.cookies['discord.oauth']
     res.cookie('discord.oauth', c);
-    res.redirect('https://moonhideoutdev.com');
+    res.status(200).send('https://moonhideoutdev.com');
 });
 
 interface Response extends express.Response {
