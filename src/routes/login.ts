@@ -10,11 +10,11 @@ router.get('/discord', passport.authenticate('discord'));
 
 router.get('/auth', (req, res) => {
     if (!req.user) {
-        return res.json({
+        return res.send({
             message: "not logged in"
         });
     }
-    res.json(req.user)
+    res.send(req.user)
 })
 
 export default router;
