@@ -4,7 +4,7 @@ import { DataTypes, Sequelize, ModelCtor, Model } from 'sequelize';
 export default function (sequelize: Sequelize) {
     const model = {
         id: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             primaryKey: true,
         },
         username: {
