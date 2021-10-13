@@ -10,8 +10,7 @@ router.get('/', function (req, res) {
 
 router.get('/redirect', passport.authenticate('discord'), (req, res) => {
     res.redirect('https://moonhideoutdev.com');
- }
-);
+});
 
 interface Response extends express.Response {
     locals: typeof Models;
