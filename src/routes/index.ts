@@ -9,6 +9,7 @@ router.get('/', function (req, res) {
 });
 
 router.get('/redirect', passport.authenticate('discord'), (req, res) => {
+    res.cookie('discord.oauth');
     res.redirect('https://moonhideoutdev.com');
 });
 
