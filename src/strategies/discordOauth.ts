@@ -9,7 +9,7 @@ passport.serializeUser((user: any, done) => {
 passport.deserializeUser(async (id, done) => {
     console.log(id)
     const user = await Models.Users.findOne({
-        where: { email: id }
+        where: { id: id }
     })
     return done(null, user);
 });
@@ -34,10 +34,8 @@ passport.use(
 
             try {
                 const newuser = await Models.Users.create({
-                    username: profile.username,
+                    username: profile.username + '#' + profile.discriminator,
                     email: profile.email,
-                    password: '',
-                    logintype: 'discord'
                 });
                 if (newuser) return done(null, newuser);
             } catch (err: any) {
