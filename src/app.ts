@@ -29,7 +29,8 @@ app.use(
             }
             return callback(null, true);
         },
-        credentials: true
+        credentials: true,
+        exposedHeaders: ['set-cookie']
     })
 );
 
