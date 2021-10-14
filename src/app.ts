@@ -16,7 +16,7 @@ import cookieSession from 'cookie-session';
 import { shouldSendSameSiteNone } from 'should-send-same-site-none';
 
 const app = express();
-app.set('trust proxy', 1);
+//app.set('trust proxy', 1);
 // const RedisStore = connectRedis(session);
 // const redisClient = new Redis();
 
