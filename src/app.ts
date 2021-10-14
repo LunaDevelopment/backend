@@ -31,7 +31,7 @@ app.use(
     cookieSession({
         name: 'discord.oauth',
         keys: ['nvdbuw93090rei-f09dsju4b'],
-        secure: true,
+        secure: false,
         sameSite: 'none',
         maxAge: 60000 * 60 * 24 * 7
     })
@@ -40,7 +40,9 @@ app.use(
 app.use(
     session({
         cookie: {
-            maxAge: 60000 * 60 * 24 * 7
+            maxAge: 60000 * 60 * 24 * 7,
+            secure: false,
+            sameSite: 'none'
         },
         secret: 'nvdbuw93090rei-f09dsju4b',
         resave: false,
