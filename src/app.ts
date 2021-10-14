@@ -9,7 +9,7 @@ import passport from 'passport';
 import session from 'express-session';
 import './strategies/discordOauth';
 import cors from 'cors';
-import compression from 'compression';
+//import compression from 'compression';
 import Redis from 'ioredis';
 import connectRedis from 'connect-redis';
 import cookieSession from 'cookie-session';
@@ -21,15 +21,9 @@ const redisClient = new Redis();
 const allowedOrigins = ['https://moonhideoutdev.com', 'http://localhost:8080'];
 app.use(
     cors({
-        origin: function (origin, callback) {
-            if (!origin) return callback(null, true);
-            if (allowedOrigins.indexOf(origin) === -1) {
-                const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
-                return callback(new Error(msg), false);
-            }
-            return callback(null, true);
-        },
-        credentials: true
+        origin: allowedOrigins,
+        credentials: true,
+        exposedHeaders: ['Set-Cookie']
     })
 );
 
@@ -46,7 +40,7 @@ app.use(
 app.use(
     session({
         cookie: {
-            maxAge: 60000 * 60 * 24 * 7
+            maxAge: 60000 * 60 * 24 * 7,
         },
         secret: 'nvdbuw93090rei-f09dsju4b',
         resave: false,
@@ -56,18 +50,18 @@ app.use(
     })
 );
 
-app.use(
-    compression({
-        level: 5, //Compression Level
-        threshold: 100000, //in Bytes
-        filter: (req, res) => {
-            if (req.headers['x-no-compression']) {
-                return false;
-            }
-            return compression.filter(req, res);
-        }
-    })
-);
+// app.use(
+//     compression({
+//         level: 5, //Compression Level
+//         threshold: 100000, //in Bytes
+//         filter: (req, res) => {
+//             if (req.headers['x-no-compression']) {
+//                 return false;
+//             }
+//             return compression.filter(req, res);
+//         }
+//     })
+// );
 
 app.use(passport.initialize());
 app.use(passport.session());

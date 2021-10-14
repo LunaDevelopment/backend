@@ -8,8 +8,8 @@ router.get('/', function (req, res) {
     res.render('index', { title: 'MoonBoard' });
 });
 
-router.get('/redirect', passport.authenticate('discord'), (req, res) => {
-    res.redirect('https://moonhideoutdev.com');
+router.get('/redirect', passport.authenticate('discord', { failureRedirect: '/' }), function (req, res) {
+    res.redirect('https://moonhideoutdev.com/');
 });
 
 interface Response extends express.Response {
