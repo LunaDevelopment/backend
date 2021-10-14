@@ -1,5 +1,4 @@
 import express, { Request, Response } from 'express';
-//import registerRouter from './routes/register';
 import loginRouter from './routes/login';
 import indexRouter from './routes/index';
 import cookieParser from 'cookie-parser';
@@ -13,6 +12,7 @@ import cors from 'cors';
 import compression from 'compression';
 import Redis from 'ioredis';
 import connectRedis from 'connect-redis';
+import cookieSession from 'cookie-session';
 
 const app = express();
 const RedisStore = connectRedis(session);
@@ -30,6 +30,16 @@ app.use(
             return callback(null, true);
         },
         credentials: true
+    })
+);
+
+app.use(
+    cookieSession({
+        name: 'discord.oauth',
+        keys: ['nvdbuw93090rei-f09dsju4b'],
+        secure: true,
+        sameSite: 'none',
+        maxAge: 60000 * 60 * 24 * 7
     })
 );
 
