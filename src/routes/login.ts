@@ -6,7 +6,7 @@ const router = Router();
 router.get('/discord', passport.authenticate('discord'));
 
 router.get('/auth', (req, res) => {
-    console.log(req.session);
+    console.log(req);
     res.send(req.user);
 });
 
