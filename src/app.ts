@@ -6,60 +6,60 @@ import createError from 'http-errors';
 import { Models } from './models';
 import logger from 'morgan';
 import passport from 'passport';
-// import session from 'express-session';
+import session from 'express-session';
 import './strategies/discordOauth';
 import cors from 'cors';
 //import compression from 'compression';
-// import Redis from 'ioredis';
-// import connectRedis from 'connect-redis';
+import Redis from 'ioredis';
+import connectRedis from 'connect-redis';
 import cookieSession from 'cookie-session';
 import { shouldSendSameSiteNone } from 'should-send-same-site-none';
 
 const app = express();
 //app.set('trust proxy', 1);
-// const RedisStore = connectRedis(session);
-// const redisClient = new Redis();
+const RedisStore = connectRedis(session);
+const redisClient = new Redis();
 
 const allowedOrigins = ['https://moonhideoutdev.com', 'http://localhost:8080'];
 app.use(
     cors({
         origin: allowedOrigins,
         credentials: true,
-        exposedHeaders: ['Set-Cookie']
+        exposedHeaders: ['set-cookie']
     })
 );
 
 app.use(shouldSendSameSiteNone);
 
-app.use(
-    cookieSession({
-        name: 'discord.oauth',
-        keys: ['nvdbuw93090rei-f09dsju4b'],
-        secure: true,
-        sameSite: 'none',
-        maxAge: 60000 * 60 * 24 * 7
-    })
-);
-
-app.use((req, res, next) => {
-    req['sessionCookies'].secure = true;
-    next();
-});
-
 // app.use(
-//     session({
-//         cookie: {
-//             maxAge: 60000 * 60 * 24 * 7,
-//             secure: true,
-//             sameSite: 'none'
-//         },
-//         secret: 'nvdbuw93090rei-f09dsju4b',
-//         resave: false,
-//         saveUninitialized: false,
-//         store: new RedisStore({ client: redisClient }),
-//         name: 'discord.oauth'
+//     cookieSession({
+//         name: 'discord.oauth',
+//         keys: ['nvdbuw93090rei-f09dsju4b'],
+//         secure: true,
+//         sameSite: 'none',
+//         maxAge: 60000 * 60 * 24 * 7
 //     })
 // );
+
+// app.use((req, res, next) => {
+//     req['sessionCookies'].secure = true;
+//     next();
+// });
+
+app.use(
+    session({
+        cookie: {
+            maxAge: 60000 * 60 * 24 * 7,
+            secure: true,
+            sameSite: 'none'
+        },
+        secret: 'nvdbuw93090rei-f09dsju4b',
+        resave: false,
+        saveUninitialized: false,
+        store: new RedisStore({ client: redisClient }),
+        name: 'discord.oauth'
+    })
+);
 
 // app.use(
 //     compression({
