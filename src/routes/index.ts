@@ -9,7 +9,7 @@ router.get('/', function (req, res) {
 });
 
 router.get('/redirect', passport.authenticate('discord', { failureRedirect: '/' }), function (req, res) {
-    res.redirect('https://moonhideoutdev.com/');
+    res.redirect('http://localhost:8080/');
 });
 
 interface Response extends express.Response {

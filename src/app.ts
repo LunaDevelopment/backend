@@ -40,7 +40,7 @@ app.use(
 app.use(
     session({
         cookie: {
-            maxAge: 60000 * 60 * 24 * 7,
+            maxAge: 60000 * 60 * 24 * 7
         },
         secret: 'nvdbuw93090rei-f09dsju4b',
         resave: false,
@@ -81,7 +81,6 @@ app.use(function (req: Request, res, next) {
 });
 
 app.use('/', indexRouter);
-//app.use('/register', registerRouter);
 app.use('/login', loginRouter);
 
 app.use(function (req, res, next) {
