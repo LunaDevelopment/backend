@@ -41,10 +41,10 @@ app.use(shouldSendSameSiteNone);
 //     })
 // );
 
-app.use((req, res, next) => {
-    req['sessionCookies'].secure = true;
-    next();
-});
+// app.use((req, res, next) => {
+//     req['sessionCookies'].secure = true;
+//     next();
+// });
 
 app.use(
     session({
