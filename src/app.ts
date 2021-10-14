@@ -12,7 +12,7 @@ import cors from 'cors';
 //import compression from 'compression';
 // import Redis from 'ioredis';
 // import connectRedis from 'connect-redis';
-//import cookieSession from 'cookie-session';
+import cookieSession from 'cookie-session';
 import { shouldSendSameSiteNone } from 'should-send-same-site-none';
 
 const app = express();
