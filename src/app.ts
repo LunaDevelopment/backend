@@ -38,7 +38,7 @@ app.use(
 );
 
 app.use((req, res, next) => {
-    req['sessionCookies'].secure = true;
+    req['cookies'].secure = true;
     next();
 });
 
