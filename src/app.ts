@@ -9,7 +9,7 @@ import passport from 'passport';
 import session from 'express-session';
 import './strategies/discordOauth';
 import cors from 'cors';
-//import compression from 'compression';
+import compression from 'compression';
 import Redis from 'ioredis';
 import connectRedis from 'connect-redis';
 
@@ -49,18 +49,18 @@ app.use(
     })
 );
 
-// app.use(
-//     compression({
-//         level: 5, //Compression Level
-//         threshold: 100000, //in Bytes
-//         filter: (req, res) => {
-//             if (req.headers['x-no-compression']) {
-//                 return false;
-//             }
-//             return compression.filter(req, res);
-//         }
-//     })
-// );
+app.use(
+    compression({
+        level: 5, //Compression Level
+        threshold: 100000, //in Bytes
+        filter: (req, res) => {
+            if (req.headers['x-no-compression']) {
+                return false;
+            }
+            return compression.filter(req, res);
+        }
+    })
+);
 
 app.use(passport.initialize());
 app.use(passport.session());

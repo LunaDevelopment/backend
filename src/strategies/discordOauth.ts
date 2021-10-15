@@ -30,13 +30,24 @@ passport.use(
             const userexists = await Models.Users.findOne({
                 where: { id: profile.id }
             });
-            if (userexists) return done(null, userexists);
+            if (userexists) {
+                const updateuser = await Models.Users.update(
+                    { avatar: profile.avatar, username: profile.username },
+                    {
+                        where: {
+                            id: profile.id
+                        }
+                    }
+                );
+                return done(null, updateuser);
+            }
 
             try {
                 const newuser = await Models.Users.create({
                     id: profile.id,
                     username: profile.username + '#' + profile.discriminator,
-                    email: profile.email
+                    email: profile.email,
+                    avatar: profile.avatar
                 });
                 if (newuser) return done(null, newuser);
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any

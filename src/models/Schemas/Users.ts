@@ -5,7 +5,7 @@ export default function (sequelize: Sequelize) {
     const model = {
         id: {
             type: DataTypes.STRING,
-            primaryKey: true,
+            primaryKey: true
         },
         username: {
             type: DataTypes.STRING,
@@ -14,6 +14,10 @@ export default function (sequelize: Sequelize) {
         email: {
             type: DataTypes.STRING,
             unique: true
+        },
+        avatar: {
+            type: DataTypes.STRING,
+            unique: false
         },
         coins: {
             type: DataTypes.INTEGER,
