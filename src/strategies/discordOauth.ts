@@ -31,15 +31,15 @@ passport.use(
                 where: { id: profile.id }
             });
             if (userexists) {
-                const updateuser = await Models.Users.update(
-                    { avatar: profile.avatar },
-                    {
-                        where: {
-                            id: profile.id
-                        }
-                    }
-                );
-                return done(null, updateuser);
+//                 const updateuser = await Models.Users.update(
+//                     { avatar: profile.avatar },
+//                     {
+//                         where: {
+//                             id: profile.id
+//                         }
+//                     }
+//                 );
+                return done(null, userexists);
             }
 
             try {
