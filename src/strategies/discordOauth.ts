@@ -3,13 +3,9 @@ import { Strategy } from 'passport-discord';
 import { Models } from '../models';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-try {
 passport.serializeUser((user: any, done) => {
     done(null, user.id);
 });
-} catch(err) {
-    console.log(err)
-}
 
 passport.deserializeUser(async (id, done) => {
     const user = await Models.Users.findOne({
